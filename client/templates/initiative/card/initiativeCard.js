@@ -7,6 +7,9 @@ Template.initiativeCard.helpers({
   },
   status: function(){
     return this.active ? 'Active': 'Inactive';
+  },
+  getEditingClass: function(){
+    return Session.get('editing') === this._id ? 'open' : '';
   }
 });
 
@@ -31,5 +34,8 @@ Template.initiativeCard.events({
         sAlert.info('initiative updated');
       }
     });
+  },
+  'click .edit-initiative': function(e, tpl){
+    Session.set('editing', this._id);
   }
 });
