@@ -43,7 +43,7 @@ Template.initiativeEditFull.events({
 
 
 function updateInitiative(initiative, tpl){
-  console.log(initiative, tpl);
+  
   var title = tpl.find('#title').value,
   description = tpl.find('#description').value,
   category = tpl.find('#category');

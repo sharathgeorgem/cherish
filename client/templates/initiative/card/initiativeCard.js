@@ -32,12 +32,10 @@ Template.initiativeCard.events({
       }
     });
   },
-
   'click .follow-button': function(e, tpl){
     e.preventDefault();
     followUnfollow(this);
   },
-
   'click .edit-initiative': function(e, tpl){
     Session.set('editing', this._id);
   }
