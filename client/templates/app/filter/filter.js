@@ -1,6 +1,6 @@
 Template.filter.helpers({
   categories: function(){
-    return InititaiveCategorySlugs;
+    return Initiatives.InititaiveCategorySlugs;
   }
 });
 

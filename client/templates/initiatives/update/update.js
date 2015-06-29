@@ -10,6 +10,6 @@ Template.initiativesUpdate.helpers({
 
 Template.initiativesUpdate.events({
   'click .update': function(){
-    Session.set('lastUpdated', new Date().getTime());
+    Session.set('lastUpdated', Date.now());
   }
 })
