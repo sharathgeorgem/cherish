@@ -49,9 +49,8 @@ Meteor.startup(function() {
     },
 
     createInitiative: function(title, description, category) {
-      var initiativeLimit = Meteor.settings.public.initiativeLimit;
       var existingInitiatives = Initiatives.find({createdBy: Meteor.userId(), active: {"$exists": true}, active: true});
-      if(existingInitiatives && existingInitiatives.count() < initiativeLimit) {
+      if(existingInitiatives && existingInitiatives.count() < 1) {
         var slug = s.slugify(title);
         var categorySlug = s.slugify(category);
         var initiative =
@@ -72,7 +71,7 @@ Meteor.startup(function() {
         Initiatives.insert(initiative);
         return slug;
       } else {
-        throw new Meteor.Error(403, "You have reached the limit of " + initiativeLimit + " initiatives.");
+        throw new Meteor.Error(403, "You are only allowed one Initiative within Cherish.");
       }
     },
 

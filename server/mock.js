@@ -5,15 +5,11 @@ if(Meteor.settings.mode === 'dev') {
   var users = [];
   var initiatives = [];
 
-
   _.mixin({
     capitalize: function(string) {
       return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     }
   });
-
-  
-
 
   Meteor.startup(function() {
 
@@ -59,25 +55,24 @@ if(Meteor.settings.mode === 'dev') {
         
       });
 
+      _.each(initiatives, function(initiative){
+        commentsNumber = faker.random.number(10);
+        _(commentsNumber).times(function(){
+          var user = faker.random.array_element(users);
+          Initiatives.direct.update(initiative, {
+            $addToSet: {
+              usersVoted: user,
+              comments: {
+                message: getWord() + ' ' + faker.lorem.sentences(1),
+                createdBy: user,
+                createdAt: new Date().getTime()
+              }
+            }
+          });
 
-  _.each(initiatives, function(initiative){
-    commentsNumber = faker.random.number(10);
-    _(commentsNumber).times(function(){
-      var user = faker.random.array_element(users);
-      Initiatives.direct.update(initiative, {
-        $addToSet: {
-          usersVoted: user,
-          comments: {
-            message: getWord() + ' ' + faker.lorem.sentences(1),
-            createdBy: user,
-            createdAt: new Date().getTime()
-          }
-        }
+          Users.update(user, { $addToSet: { commentedOn: initiative, votedOn: initiative } });
+        });
       });
-
-      Users.update(user, { $addToSet: { commentedOn: initiative, votedOn: initiative } });
-    });
+    }
   });
-}
-});
 }

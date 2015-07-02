@@ -11,7 +11,7 @@ Template.initiativeCreate.helpers({
       },
       active: true
     }).count();
-    return initiativeCount >= Meteor.settings.public.initiativeLimit;
+    return initiativeCount >= 1;
   }
 })
 
